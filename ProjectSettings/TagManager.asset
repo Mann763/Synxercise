@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - PostProcessing
+  - UI
+  - Water
+  - Ignore Raycast
+  - GameController
+  - Player
+  - MainCamera
+  - EditorOnly
+  - Finish
+  - Respawn
+  - Untagged
+  - Enemy
+  - AlarmingObject
+  - BlueEnemy
+  - RedEnemy
+  - Enemy1
+  - Enemy2
+  - EmeraldAI
+  - Projectile
+  - Flame
+  - Destroyer
+  - StartPoz
+  - EndPoz
+  - Hands
+  - projectile
+  - Legs
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - Cover
+  - 
+  - Enemy
+  - DynamicPose
+  - 
+  - PostProcessing
+  - Obstacle
+  - Ground
+  - AI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Grabbable
+  - Hand
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

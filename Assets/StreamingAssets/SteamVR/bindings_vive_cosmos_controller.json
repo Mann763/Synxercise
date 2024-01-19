@@ -1,0 +1,15 @@
+{
+  "app_key": "application.generated.unity.hvr.exe",
+  "bindings": {
+    "/actions/hvr": {
+      "chords": [],
+      "poses": [],
+      "haptics": [],
+      "sources": [],
+      "skeleton": []
+    }
+  },
+  "controller_type": "vive_cosmos_controller",
+  "description": "",
+  "name": "My [Testing] HVR configuration for Vive Cosmos Controller"
+}
