@@ -114,6 +114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyHitParticle: {fileID: 198041006860974860, guid: e5c8f176f04a8354f8fe8ae3124e5f8f,
     type: 3}
+  audioSource: {fileID: 0}
+  Enemy_hit: {fileID: 8300000, guid: ef33119dd30d1384684e78bba2acac00, type: 3}
 --- !u!95 &-8253741107767148855
 Animator:
   serializedVersion: 5
@@ -161,11 +163,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0e9e6a768de0ef544834726b4c9260c3, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.05
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -207,7 +209,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

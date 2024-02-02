@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2527343636978026978}
   m_Layer: 0
   m_Name: GameLoop Hard
-  m_TagString: Untagged
+  m_TagString: Modes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2527343636978026979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.62, y: -1.82, z: 14.86}
+  m_LocalPosition: {x: -1.62, y: -1.6, z: 14.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2527343637471873179}
@@ -62,9 +62,10 @@ MonoBehaviour:
     count: 30
     rate: 1
   nextWave: 0
-  timeBetweenWaves: 5
+  timeBetweenWaves: 3
   startgame: 0
   songBPM: 140
+  StartDelay: 5
 --- !u!1 &2527343637219336250
 GameObject:
   m_ObjectHideFlags: 0

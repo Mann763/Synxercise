@@ -2,61 +2,93 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Singleton instance
     private static ScoreManager instance;
-
-    // Player's score
     private int score = 0;
+    private int highScore = 0;
+    private string highScoreKey = "HighScore";
 
-    // Event to notify score changes
     public delegate void ScoreChangedDelegate(int newScore);
     public static event ScoreChangedDelegate OnScoreChanged;
 
-    // Method to get the singleton instance
+    public delegate void HighScoreChangedDelegate(int newHighScore);
+    public static event HighScoreChangedDelegate OnHighScoreChanged;
+
     public static ScoreManager Instance
     {
         get
         {
             if (instance == null)
             {
-                // If no instance exists, try to find one in the scene
                 instance = FindObjectOfType<ScoreManager>();
-
-                // If no instance is found in the scene, create a new one
                 if (instance == null)
                 {
                     GameObject singletonObject = new GameObject("ScoreManager");
                     instance = singletonObject.AddComponent<ScoreManager>();
                 }
             }
-
             return instance;
         }
     }
 
-    // Method to add points to the score
+    private void Start()
+    {
+        // Load the high score from PlayerPrefs on start
+        LoadHighScore();
+    }
+
     public void AddPoints(int points)
     {
         score += points;
+
+        // Update high score if the current score surpasses it
+        if (score > highScore)
+        {
+            highScore = score;
+            SaveHighScore();
+            OnHighScoreChanged?.Invoke(highScore);
+        }
 
         // Notify subscribers that the score has changed
         OnScoreChanged?.Invoke(score);
     }
 
-    // Method to get the current score
     public int GetScore()
     {
         return score;
     }
 
-    // Optional: Reset the score
+    public int GetHighScore()
+    {
+        return highScore;
+    }
+
     public void ResetScore()
     {
         score = 0;
         OnScoreChanged?.Invoke(score);
     }
 
-    // Ensure that the instance is not destroyed when changing scenes
+    public void ResetHighScore()
+    {
+        highScore = 0;
+        SaveHighScore();
+        OnHighScoreChanged?.Invoke(highScore);
+    }
+
+    private void SaveHighScore()
+    {
+        PlayerPrefs.SetInt(highScoreKey, highScore);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadHighScore()
+    {
+        if (PlayerPrefs.HasKey(highScoreKey))
+        {
+            highScore = PlayerPrefs.GetInt(highScoreKey);
+        }
+    }
+
     private void Awake()
     {
         if (instance == null)

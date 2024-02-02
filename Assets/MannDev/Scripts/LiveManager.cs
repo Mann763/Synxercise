@@ -11,7 +11,7 @@ public class LiveManager : MonoBehaviour
     private static LiveManager instance;
 
     // Number of lives
-    public int lives = 3; // You can set the initial number of lives as needed
+    public int lives = 10; // You can set the initial number of lives as needed
 
     // Event to notify when lives change
     public delegate void LivesChangedDelegate(int newLives);
@@ -24,10 +24,8 @@ public class LiveManager : MonoBehaviour
         {
             if (instance == null)
             {
-                // If no instance exists, try to find one in the scene
                 instance = FindObjectOfType<LiveManager>();
 
-                // If no instance is found in the scene, create a new one
                 if (instance == null)
                 {
                     GameObject singletonObject = new GameObject("LiveManager");
@@ -42,17 +40,13 @@ public class LiveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Subscribe to the OnLivesChanged event
         OnLivesChanged += UpdateLivesText;
-
-        // Initialize the lives text
         UpdateLivesText(lives);
     }
 
     // Method to update the lives text
     void UpdateLivesText(int newLives)
     {
-        // Update the TextMeshPro text component
         if (livesText != null)
         {
             livesText.text = "Lives: " + newLives.ToString();
@@ -64,15 +58,21 @@ public class LiveManager : MonoBehaviour
     {
         lives--;
 
-        // Notify subscribers that the lives have changed
         OnLivesChanged?.Invoke(lives);
 
-        // Check for game over or handle other logic based on remaining lives
         if (lives <= 0)
         {
-            // Game over logic, reset the game or show a game over screen
+            GameObject.FindGameObjectWithTag("Modes").GetComponent<Spawner>().GameOver();
             Debug.Log("Game Over!");
         }
+    }
+
+    // Method to reset lives to a specified value
+    public void ResetLives(int newLives)
+    {
+        lives = newLives;
+
+        OnLivesChanged?.Invoke(lives);
     }
 
     // Ensure that the instance is not destroyed when changing scenes

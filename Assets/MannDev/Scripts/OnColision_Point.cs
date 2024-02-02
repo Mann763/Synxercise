@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Content.Interaction;
 
 public class OnColision_Point : MonoBehaviour
 {
     [SerializeField] private int ScoreToAdd = 1;
     [SerializeField] private ParticleSystem PointParticle;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip Point_hit;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,7 +17,12 @@ public class OnColision_Point : MonoBehaviour
             {
                 // Add points and log
                 ScoreManager.Instance.AddPoints(ScoreToAdd);
-                Instantiate(PointParticle, other.ClosestPoint(this.transform.position),Quaternion.identity);
+                Vector3 contactPoint = other.ClosestPoint(this.transform.position);
+
+                Instantiate(PointParticle, contactPoint,Quaternion.identity);
+                
+                this.gameObject.AddComponent<AudioSource>().PlayOneShot(Point_hit, 0.01f);
+
                 Debug.Log("Points added: " + ScoreToAdd);
 
             }
@@ -27,7 +31,7 @@ public class OnColision_Point : MonoBehaviour
                 Debug.LogError("ScoreManager not found!");
             }
             // Destroy the GameObject with this script
-            Destroy(gameObject);
+            Destroy(gameObject,0.5f);
         }
     }
 }

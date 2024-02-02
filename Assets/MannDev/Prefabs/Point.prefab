@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -42975853068006929}
   - component: {fileID: 8232052497472220796}
   - component: {fileID: 1049401890}
+  - component: {fileID: 1089949421568535283}
   m_Layer: 0
   m_Name: Point
   m_TagString: Untagged
@@ -113,6 +114,8 @@ MonoBehaviour:
   ScoreToAdd: 1
   PointParticle: {fileID: 198390457726892526, guid: 10a540a31eb82b74bbc531295bae159e,
     type: 3}
+  audioSource: {fileID: 0}
+  Point_hit: {fileID: 8300000, guid: 9e256aa2e1436e14f89dfdce52fe248b, type: 3}
 --- !u!54 &8232052497472220796
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -139,9 +142,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0e9e6a768de0ef544834726b4c9260c3, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -185,7 +188,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -225,3 +228,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1089949421568535283
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4647936156960847647}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 06414d881d21f3e4cb47515adb19931f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

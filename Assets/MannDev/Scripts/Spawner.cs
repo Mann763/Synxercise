@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using Valve.VR;
 
 public class Spawner : MonoBehaviour
 {
@@ -34,9 +36,13 @@ public class Spawner : MonoBehaviour
 
     public float songBPM = 120f;
 
+    public float StartDelay = 2.0f;    
+
     void Start()
     {
-        waveCountdown = timeBetweenWaves;
+        ScoreManager.Instance.ResetScore();
+        LiveManager.Instance.ResetLives(10);
+        waveCountdown = StartDelay;
         enemyPool = new GameObject[waves[0].count]; // Assuming the first wave count is the maximum
         for (int i = 0; i < enemyPool.Length; i++)
         {
@@ -91,8 +97,7 @@ public class Spawner : MonoBehaviour
 
         if (nextWave + 1 > waves.Length - 1)
         {
-            Debug.Log("Waves Completed");
-            nextWave = 0;
+            GameOver();
         }
         else
         {
@@ -187,6 +192,8 @@ public class Spawner : MonoBehaviour
         state = SpawnState.COUNTING;
         startgame = true;
 
+        //reset score
+        ScoreManager.Instance.ResetScore();
         // Reset enemy pool
         ResetEnemyPool();
 
@@ -207,5 +214,15 @@ public class Spawner : MonoBehaviour
         {
             enemy.SetActive(false);
         }
+    }
+
+    public void GameOver()
+    {
+        GameModes.Instance.gameObject.SetActive(true);
+        GameModes.Instance.ShowButtons();
+        DOTween.KillAll();
+
+        FindObjectOfType<AudioManager>().StopActiveSound();
+        Destroy(this.gameObject);
     }
 }

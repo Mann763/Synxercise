@@ -1,68 +1,156 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameModes : MonoBehaviour
 {
-    public GameObject EasyMode;
-    public GameObject MediumMode;
-    public GameObject HardMode;
+    [SerializeField] private GameObject EasyMode;
+    [SerializeField] private GameObject MediumMode;
+    [SerializeField] private GameObject HardMode;
+    [SerializeField] private GameObject ExtremeMode;
 
-    private Vector3 StartPoz = new Vector3(-1.62f,-1.82000005f,14.8599997f);
+    [SerializeField] private Vector3 StartPoz = new Vector3(-1.62f,-1.6f,14.8599997f);
 
-    public bool Test_Easy;
-    public bool Test_Medium;
-    public bool Test_Hard;
-    public bool Test_All;
+    [SerializeField] private bool Test_Easy;
+    [SerializeField] private bool Test_Medium;
+    [SerializeField] private bool Test_Hard;
+    [SerializeField] private bool Test_Extreme;
+
+    [SerializeField] private int StartAudioDelay_Easy = 5;
+    [SerializeField] private int StartAudioDelay_Medium = 4;
+    [SerializeField] private int StartAudioDelay_Hard = 3;
+    [SerializeField] private int StartAudioDelay_Extreme = 2;
+
+
+
+    [SerializeField] private bool Nosound_Test_All;
+    private static GameModes instance;
+
+    private bool GameStart;
+    private Animator animator;
+    private static readonly int _gamestart = Animator.StringToHash("Game Started");
+
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    public static GameModes Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<GameModes>();
+                if (instance == null)
+                {
+                    GameObject singletonObject = new GameObject("GameModes");
+                    instance = singletonObject.AddComponent<GameModes>();
+                }
+            }
+            return instance;
+        }
+    }
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void OnselectEasyMode()
     {
         GameObject inst = Instantiate(EasyMode,StartPoz,Quaternion.identity);
         inst.GetComponent<Spawner>().StartGame();
-        this.gameObject.SetActive(false);
+        HideButtons();
+        FindObjectOfType<AudioManager>().PlaySound("Easy_GameMode", StartAudioDelay_Easy);
     }
 
     public void OnselectMediumMode()
     {
         GameObject inst = Instantiate(MediumMode, StartPoz, Quaternion.identity);
         inst.GetComponent<Spawner>().StartGame();
-        this.gameObject.SetActive(false);
+        HideButtons();
+        FindObjectOfType<AudioManager>().PlaySound("Medium_GameMode", StartAudioDelay_Medium);
     }
 
     public void OnselectHardMode()
     {
         GameObject inst = Instantiate(HardMode, StartPoz, Quaternion.identity);
         inst.GetComponent<Spawner>().StartGame();
-        this.gameObject.SetActive(false);
+        HideButtons();
+        FindObjectOfType<AudioManager>().PlaySound("Hard_GameMode", StartAudioDelay_Hard);
     }
-    void Test_InstantiateAndStartGame(GameObject mode)
+
+    public void OnselectExtremeMode()
+    {
+        GameObject inst = Instantiate(ExtremeMode, StartPoz, Quaternion.identity);
+        inst.GetComponent<Spawner>().StartGame();
+        HideButtons();
+        FindObjectOfType<AudioManager>().PlaySound("Extreme_GameMode", StartAudioDelay_Extreme);
+    }
+    void Test_InstantiateAndStartGame(GameObject mode, string soundname)
     {
         GameObject inst = Instantiate(mode, StartPoz, Quaternion.identity);
         inst.GetComponent<Spawner>().StartGame();
-        this.gameObject.SetActive(false);
+        HideButtons();
+        FindObjectOfType<AudioManager>().PlaySound(soundname);
     }
+
+    void Test_InstantiateAndStartGameNosound(GameObject mode)
+    {
+        GameObject inst = Instantiate(mode, StartPoz, Quaternion.identity);
+        inst.GetComponent<Spawner>().StartGame();
+        HideButtons();
+    }
+
+    public void HideButtons()
+    {
+        GameStart = true;
+        animator.SetBool(_gamestart, GameStart);
+        GameObject.FindGameObjectWithTag("Tutorial").SetActive(false);
+    }
+
+    public void ShowButtons()
+    {
+        GameStart = false;
+        animator.SetBool(_gamestart, GameStart);
+        GameObject.FindGameObjectWithTag("Tutorial").SetActive(true);
+    }
+
     private void Update()
     {
         if (this.gameObject.activeSelf)
         {
             if (Test_Easy)
             {
-                Test_InstantiateAndStartGame(EasyMode);
+                Test_InstantiateAndStartGame(EasyMode, "Easy_GameMode");
             }
             else if (Test_Medium)
             {
-                Test_InstantiateAndStartGame(MediumMode);
+                Test_InstantiateAndStartGame(MediumMode, "Medium_GameMode");
             }
             else if (Test_Hard)
             {
-                Test_InstantiateAndStartGame(HardMode);
+                Test_InstantiateAndStartGame(HardMode, "Hard_GameMode");
             }
-            else if (Test_All)
+            else if (Test_Extreme)
             {
-                Test_InstantiateAndStartGame(EasyMode);
-                Test_InstantiateAndStartGame(MediumMode);
-                Test_InstantiateAndStartGame(HardMode);
+                Test_InstantiateAndStartGame(ExtremeMode, "Extreme_GameMode");
+            }
+            else if (Nosound_Test_All)
+            {
+                Test_InstantiateAndStartGameNosound(EasyMode);
+                Test_InstantiateAndStartGameNosound(MediumMode);
+                Test_InstantiateAndStartGameNosound(HardMode);
+                Test_InstantiateAndStartGameNosound(ExtremeMode);
             }
         }
     }
+
 }

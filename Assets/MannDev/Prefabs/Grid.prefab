@@ -61,13 +61,28 @@ MonoBehaviour:
   - name: Duck
     rows:
     - 1111
-    - 0000
+    - 1111
     - 0220
   - name: Jump
     rows:
     - 0220
     - 0000
     - 1111
+  - name: Full Right Slide
+    rows:
+    - 1110
+    - 1112
+    - 1110
+  - name: Full Left Slide
+    rows:
+    - 0111
+    - 2111
+    - 0111
+  - name: Center
+    rows:
+    - 1001
+    - 1221
+    - 1001
   spacing: 1
   startTransform: {fileID: 0}
   endTransform: {fileID: 0}

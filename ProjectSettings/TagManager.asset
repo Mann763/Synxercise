@@ -30,6 +30,9 @@ TagManager:
   - Hands
   - projectile
   - Legs
+  - Modes
+  - Buttons
+  - Tutorial
   layers:
   - Default
   - TransparentFX

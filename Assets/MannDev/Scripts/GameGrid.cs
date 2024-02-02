@@ -2,8 +2,6 @@ using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
-using UnityEditor.Rendering;
-using TMPro;
 
 [System.Serializable]
 public class GridPreset
@@ -51,14 +49,6 @@ public class GameGrid : MonoBehaviour
         else
         {
             Debug.LogError("Start position not found!");
-        }
-    }
-
-    private void Update()
-    {
-        if (LiveManager.Instance.lives <= 0)
-        {
-            OnGameOver();
         }
     }
 
@@ -137,11 +127,6 @@ public class GameGrid : MonoBehaviour
 
     public void OnGameOver()
     {
-        transform.DOPause();
-
-        if (spawner != null)
-        {
-            spawner.TogglePause();
-        }
+        transform.DOPause();        
     }
 }
