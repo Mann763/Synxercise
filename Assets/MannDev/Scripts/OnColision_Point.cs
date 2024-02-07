@@ -21,7 +21,7 @@ public class OnColision_Point : MonoBehaviour
 
                 Instantiate(PointParticle, contactPoint,Quaternion.identity);
                 
-                this.gameObject.AddComponent<AudioSource>().PlayOneShot(Point_hit, 0.01f);
+                //this.gameObject.AddComponent<AudioSource>().PlayOneShot(Point_hit, 0.01f);
 
                 Debug.Log("Points added: " + ScoreToAdd);
 
@@ -31,7 +31,7 @@ public class OnColision_Point : MonoBehaviour
                 Debug.LogError("ScoreManager not found!");
             }
             // Destroy the GameObject with this script
-            Destroy(gameObject,0.5f);
+            Destroy(gameObject);
         }
     }
 }
