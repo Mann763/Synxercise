@@ -223,6 +223,8 @@ public class Spawner : MonoBehaviour
         DOTween.KillAll();
 
         FindObjectOfType<AudioManager>().StopActiveSound();
+        FindObjectOfType<AudioManager>().PlaySound("Theme");
+
         Destroy(this.gameObject);
     }
 }

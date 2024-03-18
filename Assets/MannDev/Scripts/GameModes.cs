@@ -19,7 +19,7 @@ public class GameModes : MonoBehaviour
     [SerializeField] private int StartAudioDelay_Hard = 3;
     [SerializeField] private int StartAudioDelay_Extreme = 2;
 
-
+    private GameObject tutorial;
 
     [SerializeField] private bool Nosound_Test_All;
     private static GameModes instance;
@@ -32,6 +32,8 @@ public class GameModes : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+
+        tutorial = GameObject.FindGameObjectWithTag("Tutorial");
     }
 
     public static GameModes Instance
@@ -113,14 +115,14 @@ public class GameModes : MonoBehaviour
     {
         GameStart = true;
         animator.SetBool(_gamestart, GameStart);
-        GameObject.FindGameObjectWithTag("Tutorial").SetActive(false);
+        tutorial.SetActive(false);
     }
 
     public void ShowButtons()
     {
         GameStart = false;
         animator.SetBool(_gamestart, GameStart);
-        GameObject.FindGameObjectWithTag("Tutorial").SetActive(true);
+        tutorial.SetActive(true);
     }
 
     private void Update()
