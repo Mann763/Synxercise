@@ -1,2 +1,2 @@
-# VR_Untitled
+# Synxercise
  Base Game
